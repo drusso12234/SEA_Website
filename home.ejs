@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SEA Study</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function shuffle(array) {
+      array.sort(() => Math.random() - .5);
+    }
+
+    function fMod(a, b) {
+      while (a >= b) {
+        a -= b;
+      }
+      return a;
+    }
+
+    function validateScore(intScore) {
+      if (intScore < 1 || intScore > 7) {
+        return 0;
+      }
+      else {
+        if (fMod(intScore, .5)){
+          return 0;
+        }
+        return 1;
+      }
+    }
+
+    function getScore() {
+      var score = prompt("Please enter the sensitivity score for the video.\nPlease score it 1-7, with intervals of .5\n\n1=lowest sensitivity to 7=highest sensitivity");
+      while (score == null || score == "" || !validateScore(parseFloat(score))){
+        score = prompt("You must enter a valid score to proceed.")
+      }
+      scoreArr[1][arr[i-1]].push(score);
+      var score = prompt("Please enter the intrusiveness score for the video.\nPlease score it 1-7, with intervals of .5\n\n1=lowest intrusiveness to 7=highest intrusiveness");
+      while (score == null || score == "" || !validateScore(parseFloat(score))){
+        score = prompt("You must enter a valid score to proceed.")
+      }
+      scoreArr[2][arr[i-1]].push(score);
+      var score = prompt("Please enter the warmth score for the video.\nPlease score it 1-7, with intervals of .5\n\n1=lowest warmth to 7=highest warmth");
+      while (score == null || score == "" || !validateScore(parseFloat(score))){
+        score = prompt("You must enter a valid score to proceed.")
+      }
+      scoreArr[3][arr[i-1]].push(score);
+      window.alert("Take a moment to compare your ratings to the expert ratings.\nYour ratings: Sensitivity: " + scoreArr[1][arr[i-1]][0] + ", Intrusiveness: "+ scoreArr[2][arr[i-1]][0] + ", Warmth: " + scoreArr[3][arr[i-1]][0]+"\nExpert ratings: Sensitivity: " + expertDict[scoreArr[0][i-1]][0] + ", Intrusiveness: "+ expertDict[scoreArr[0][i-1]][1] + ", Warmth: " + expertDict[scoreArr[0][i-1]][2])
+
+      //fillTable();
+    }
+
+    function next() {
+      if (i > 0) {
+        getScore();
+      }
+      if (i == 0) {
+        window.alert("You have completed the first component. For this next part, you will be asked to provide your ratings of warmth, sensitivity, and intrusiveness for several videos. You will be prompted to enter your ratings after each video ends.  After you enter your ratings, expert ratings will be shown so you can compare you answers.");
+
+//      id = prompt("Please enter an id number between 6000 and 7000");
+      }
+      if (i == j) {
+        getSpreadsheet();
+      }
+      if (i < j) {
+        //document.getElementById(scoreTable).style.display = "block";
+        vid.src = arr[i];
+        console.log(arr[i]);
+        currentVid = arr[i];
+        vid.style.display = "block";
+        i++;
+      }
+    }
+
+    function introNext() {
+      if (i == introLength) {
+        i = 0;
+        introLength = -1;
+      }
+      if (i < introLength) {
+	if (i < introLength - 2) {
+	  window.prompt("Once you have thought of your rating, enter \"0\" to continue.");
+	}
+	else {
+	  window.prompt("Once you have thought of your ratings, enter \"0\" to continue.");
+	}
+
+        vid.src = introArr[i];
+        console.log(introArr[i]);
+        currentVid = introArr[i];
+        vid.style.display = "block";
+        i++;
+      }
+      if (i > introLength) {
+        next();
+      }
+
+    }
+
+    async function getSpreadsheet() {
+
+      xhttp.open("POST", "https://interactioncoding.a2hosted.com:42730", true);
+      //xhttp.open("POST", "http://localhost:42730", true);
+      //xhttp.open("POST", "http://127.0.0.1:42730/", true);
+      xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+      //var send = {"fname": "John", "lname": "Doe"};
+      let send = {"id": window.location.hash.substring(1), "100a": ""+scoreArr[1]["100a.mp4"].toString()+"," + scoreArr[2]["100a.mp4"].toString()+ "," + scoreArr[3]["100a.mp4"].toString() + "",
+                  "100b": ""+scoreArr[1]["100b.mp4"].toString()+"," + scoreArr[2]["100b.mp4"].toString()+ "," + scoreArr[3]["100b.mp4"].toString() + "",
+                  "100c": ""+scoreArr[1]["100c.mp4"].toString()+"," + scoreArr[2]["100c.mp4"].toString()+ "," + scoreArr[3]["100c.mp4"].toString() + "",
+                  "104a": ""+scoreArr[1]["104a.mp4"].toString()+"," + scoreArr[2]["104a.mp4"].toString()+ "," + scoreArr[3]["104a.mp4"].toString() + "",
+                  "104b": ""+scoreArr[1]["104b.mp4"].toString()+"," + scoreArr[2]["104b.mp4"].toString()+ "," + scoreArr[3]["104b.mp4"].toString() + "",
+                  "104c": ""+scoreArr[1]["104c.mp4"].toString()+"," + scoreArr[2]["104c.mp4"].toString()+ "," + scoreArr[3]["104c.mp4"].toString() + "",
+                  "115a": ""+scoreArr[1]["115a.mp4"].toString()+"," + scoreArr[2]["115a.mp4"].toString()+ "," + scoreArr[3]["115a.mp4"].toString() + "",
+                  "115b": ""+scoreArr[1]["115b.mp4"].toString()+"," + scoreArr[2]["115b.mp4"].toString()+ "," + scoreArr[3]["115b.mp4"].toString() + "",
+                  "115c": ""+scoreArr[1]["115c.mp4"].toString()+"," + scoreArr[2]["115c.mp4"].toString()+ "," + scoreArr[3]["115c.mp4"].toString() + "",
+                  "132a": ""+scoreArr[1]["132a.mp4"].toString()+"," + scoreArr[2]["132a.mp4"].toString()+ "," + scoreArr[3]["132a.mp4"].toString() + "",
+                  "132b": ""+scoreArr[1]["132b.mp4"].toString()+"," + scoreArr[2]["132b.mp4"].toString()+ "," + scoreArr[3]["132b.mp4"].toString() + "",
+                  "132c": ""+scoreArr[1]["132c.mp4"].toString()+"," + scoreArr[2]["132c.mp4"].toString()+ "," + scoreArr[3]["132c.mp4"].toString() + ""};
+
+	var formBody = [];
+	for (var video in send) {
+	      var key = encodeURIComponent(video);
+	      var val = encodeURIComponent(send[video]);
+	      formBody.push(key + "=" + val);
+	}
+	formBody = formBody.join("&");
+      //var sendString = JSON.stringify(send);
+      //alert(sendString);
+      xhttp.send(formBody);
+
+      window.alert("Thank you for completing the study. You may close the page.");
+    }
+    var id = 0;
+    var i = 0;
+    var sensArr = {"100a.mp4": [],
+    "100b.mp4": [],
+    "100c.mp4": [],
+    "104a.mp4": [],
+    "104b.mp4": [],
+    "104c.mp4": [],
+    "115a.mp4": [],
+    "115b.mp4": [],
+    "115c.mp4": [],
+    "132a.mp4": [],
+    "132b.mp4": [],
+    "132c.mp4": []};
+    var intrArr = {"100a.mp4": [],
+    "100b.mp4": [],
+    "100c.mp4": [],
+    "104a.mp4": [],
+    "104b.mp4": [],
+    "104c.mp4": [],
+    "115a.mp4": [],
+    "115b.mp4": [],
+    "115c.mp4": [],
+    "132a.mp4": [],
+    "132b.mp4": [],
+    "132c.mp4": []};
+    var warmArr = {"100a.mp4": [],
+    "100b.mp4": [],
+    "100c.mp4": [],
+    "104a.mp4": [],
+    "104b.mp4": [],
+    "104c.mp4": [],
+    "115a.mp4": [],
+    "115b.mp4": [],
+    "115c.mp4": [],
+    "132a.mp4": [],
+    "132b.mp4": [],
+    "132c.mp4": []};
+    var xhttp = new XMLHttpRequest();
+    var currentVid;
+    var expertDict = {
+      "100a.mp4": [3, 4.5, 6],
+      "100b.mp4": [2.5, 4, 5],
+      "100c.mp4": [1.5, 7, 5.5],
+      "104a.mp4": [5.5, 1.5, 4.5],
+      "104b.mp4": [4, 3.5, 6],
+      "104c.mp4": [5.5, 1, 6],
+      "115a.mp4": [3, 5.5, 6],
+      "115b.mp4": [3, 4.5, 6.5],
+      "115c.mp4": [4, 3.5, 6],
+      "132a.mp4": [2.5, 2, 4.5],
+      "132b.mp4": [3, 1.5, 4.5],
+      "132c.mp4": [2, 1, 3.5]
+    };
+    let introArr = ["Part2.mp4","Part3.mp4","Part4.mp4","Part5.mp4","Part6.mp4",
+    "Part7.mp4","Part8.mp4","Part9.mp4"];
+
+    let arr = ["100a.mp4","100b.mp4", "100c.mp4", "104a.mp4", "104b.mp4",
+    "104c.mp4", "115a.mp4", "115b.mp4", "115c.mp4", "132a.mp4","132b.mp4",
+    "132c.mp4"];
+    var scoreArr = [arr, sensArr, intrArr, warmArr];
+    var j = arr.length;
+    var introLength = introArr.length;
+    shuffle(arr);
+    //var id = prompt("Please enter your user ID");
+  </script>
+</head>
+
+<body>
+  <h1 style="text-align: center"> Instructional Video</h1>
+  <div class="box" style="margin: auto">
+    <video id="instr" height="400" width="711" controls>
+      <source src="Part1.mp4" type="video/mp4">
+      Please use Chrome
+    </video>
+  </div>
+
+  <script>
+    var vid = document.getElementById("instr");
+    vid.onended = function() {
+      if (vid.style.display === "none") {
+        vid.style.display = "block";
+      } else {
+        vid.style.display = "none";
+      }
+      introNext();
+    };
+  </script>
+
+</body>
+</html>

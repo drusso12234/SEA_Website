@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>interaction</title>
+</head>
+
+<body>
+  <h1 style="text-align: center"> Introduction </h1>
+
+  <script>
+    var id = prompt("Please enter your given ID number");
+    while (id < 6000 || id > 6999) {
+      id = prompt("Please enter a valid ID number");
+    }
+    var pass = prompt("Please enter the given password");
+    while (pass != "babies123") {
+      pass = prompt("Password incorrect, please contact supervisor for assitance");
+    }
+
+    function nextPage() {
+      window.location.href = 'home.ejs' + '#' + id;
+    }
+  </script>
+  <p>This part of the study consists has two components:</p>
+  <p>1.First, you will watch a training video that is approximately 30-minutes long. This video will teach you about three caregiving behaviors: warmth, sensitivity, and intrusiveness, and how child development experts rate real life parent–child interactions for these behaviors.</p>
+  <p>2.Next, you will rate several videos by yourself. We anticipate this part of the study will take approximately 30 minutes. </p>
+  Please note that if you exit out of the window at any time you will not be able to resume where you left off. Please do your best to complete both components of this part of the study in one sitting. If you need to take a break, DO NOT EXIT OUT OF THIS WINDOW. Thank you!
+  <br><br>
+  <button type="button" onclick="nextPage()">Continue</button>
+
+</body>
