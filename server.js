@@ -21,23 +21,29 @@ async function accessSpreadsheet(jsonData) {
 
   await doc.loadInfo();
 
+//    console.log(jsonData[id]);
+    console.log(jsonData['100a']);
   //var data = JSON.stringify(Object.keys(jsonData)[0]);
-  var data = jsonData.replace(/%2C/g, ",");
+  var data = String(jsonData).replace(/%2C/g, ",");
+
+    console.log(jsonData['id']);
+
   const sheet = doc.sheetsByIndex[0];
   console.log(sheet.rowCount);
 
-  const testRow = await sheet.addRow({'ID': data.substring(data.search("id") + 3, data.search("100a") - 1) , '100aSens': data.substring(data.search("100a") + 5, data.search("100b") - 1).split(",")[0], '100aIntr': data.substring(data.search("100a") + 5, data.search("100b") - 1).split(",")[1], '100aWarm': data.substring(data.search("100a") + 5, data.search("100b") - 1).split(",")[2],
-                                      '100bSens': data.substring(data.search("100b") + 5, data.search("100c") - 1).split(",")[0], '100bIntr': data.substring(data.search("100b") + 5, data.search("100c") - 1).split(",")[1], '100bWarm': data.substring(data.search("100b") + 5, data.search("100c") - 1).split(",")[2],
-                                      '100cSens': data.substring(data.search("100c") + 5, data.search("104a") - 1).split(",")[0], '100cIntr': data.substring(data.search("100c") + 5, data.search("104a") - 1).split(",")[1], '100cWarm': data.substring(data.search("100c") + 5, data.search("104a") - 1).split(",")[2],
-                                      '104aSens': data.substring(data.search("104a") + 5, data.search("104b") - 1).split(",")[0], '104aIntr': data.substring(data.search("104a") + 5, data.search("104b") - 1).split(",")[1], '104aWarm': data.substring(data.search("104a") + 5, data.search("104b") - 1).split(",")[2],
-                                      '104bSens': data.substring(data.search("104b") + 5, data.search("104c") - 1).split(",")[0], '104bIntr': data.substring(data.search("104b") + 5, data.search("104c") - 1).split(",")[1], '104bWarm': data.substring(data.search("104b") + 5, data.search("104c") - 1).split(",")[2],
-                                      '104cSens': data.substring(data.search("104c") + 5, data.search("115a") - 1).split(",")[0], '104cIntr': data.substring(data.search("104c") + 5, data.search("115a") - 1).split(",")[1], '104cWarm': data.substring(data.search("104c") + 5, data.search("115a") - 1).split(",")[2],
-                                      '115aSens': data.substring(data.search("115a") + 5, data.search("115b") - 1).split(",")[0], '115aIntr': data.substring(data.search("115a") + 5, data.search("115b") - 1).split(",")[1], '115aWarm': data.substring(data.search("115a") + 5, data.search("115b") - 1).split(",")[2],
-                                      '115bSens': data.substring(data.search("115b") + 5, data.search("115c") - 1).split(",")[0], '115bIntr': data.substring(data.search("115b") + 5, data.search("115c") - 1).split(",")[1], '115bWarm': data.substring(data.search("115b") + 5, data.search("115c") - 1).split(",")[2],
-                                      '115cSens': data.substring(data.search("115c") + 5, data.search("132a") - 1).split(",")[0], '115cIntr': data.substring(data.search("115c") + 5, data.search("132a") - 1).split(",")[1], '115cWarm': data.substring(data.search("115c") + 5, data.search("132a") - 1).split(",")[2],
-                                      '132aSens': data.substring(data.search("132a") + 5, data.search("132b") - 1).split(",")[0], '132aIntr': data.substring(data.search("132a") + 5, data.search("132b") - 1).split(",")[1], '132aWarm': data.substring(data.search("132a") + 5, data.search("132b") - 1).split(",")[2],
-                                      '132bSens': data.substring(data.search("132b") + 5, data.search("132c") - 1).split(",")[0], '132bIntr': data.substring(data.search("132b") + 5, data.search("132c") - 1).split(",")[1], '132bWarm': data.substring(data.search("132b") + 5, data.search("132c") - 1).split(",")[2],
-                                      '132cSens': data.substring(data.search("132c") + 5, data.lastIndexOf(",") + 2).split(",")[0], '132cIntr': data.substring(data.search("132c") + 5, data.lastIndexOf(",") + 2).split(",")[1], '132cWarm': data.substring(data.search("132c") + 5, data.lastIndexOf(",") + 2).split(",")[2]
+  const testRow = await sheet.addRow({'ID': jsonData['id'], 
+				      '100aSens': jsonData['100a'].split(",")[0], '100aIntr': jsonData['100a'].split(",")[1], '100aWarm': jsonData['100a'].split(",")[2],
+                                      '100bSens': jsonData['100b'].split(",")[0], '100bIntr': jsonData['100b'].split(",")[1], '100bWarm': jsonData['100b'].split(",")[2],
+                                      '100cSens': jsonData['100c'].split(",")[0], '100cIntr': jsonData['100c'].split(",")[1], '100cWarm': jsonData['100c'].split(",")[2],
+                                      '104aSens': jsonData['104a'].split(",")[0], '104aIntr': jsonData['104a'].split(",")[1], '104aWarm': jsonData['104a'].split(",")[2],
+                                      '104bSens': jsonData['104b'].split(",")[0], '104bIntr': jsonData['104b'].split(",")[1], '104bWarm': jsonData['104b'].split(",")[2],
+                                      '104cSens': jsonData['104c'].split(",")[0], '104cIntr': jsonData['104c'].split(",")[1], '104cWarm': jsonData['104c'].split(",")[2],
+                                      '115aSens': jsonData['115a'].split(",")[0], '115aIntr': jsonData['115a'].split(",")[1], '115aWarm': jsonData['115a'].split(",")[2],
+                                      '115bSens': jsonData['115b'].split(",")[0], '115bIntr': jsonData['115b'].split(",")[1], '115bWarm': jsonData['115b'].split(",")[2],
+                                      '115cSens': jsonData['115c'].split(",")[0], '115cIntr': jsonData['115c'].split(",")[1], '115cWarm': jsonData['115c'].split(",")[2],
+                                      '132aSens': jsonData['132a'].split(",")[0], '132aIntr': jsonData['132a'].split(",")[1], '132aWarm': jsonData['132a'].split(",")[2],
+                                      '132bSens': jsonData['132b'].split(",")[0], '132bIntr': jsonData['132b'].split(",")[1], '132bWarm': jsonData['132b'].split(",")[2],
+                                      '132cSens': jsonData['132c'].split(",")[0], '132cIntr': jsonData['132c'].split(",")[1], '132cWarm': jsonData['132c'].split(",")[2]
                                       });
 }
 
@@ -47,6 +53,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 // Process application/json
 //app.use(cors());
 app.use(bodyParser.json());
+
+app.set('view engine', 'ejs');
 
 router.get('/', function(request, response) {
     fs.readFile(__dirname + '/intro.ejs', function(error, data) {
@@ -102,619 +110,663 @@ router.get('/style.css', function(request, response) {
     }
   })
 });
-app.post('', function(req, res) {
+
+router.get('/part1.mp4', function (req, res) {
+  var path = __dirname + '/part1.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part2.mp4', function (req, res) {
+  var path = __dirname + '/part2.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part3.mp4', function (req, res) {
+  var path = __dirname + '/part3.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part4.mp4', function (req, res) {
+  var path = __dirname + '/part4.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part5.mp4', function (req, res) {
+  var path = __dirname + '/part5.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part6.mp4', function (req, res) {
+  var path = __dirname + '/part6.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part7.mp4', function (req, res) {
+  var path = __dirname + '/part7.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part8.mp4', function (req, res) {
+  var path = __dirname + '/part8.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/part9.mp4', function (req, res) {
+  var path = __dirname + '/part9.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/100a.mp4', function (req, res) {
+  var path = __dirname + '/100a.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/100b.mp4', function (req, res) {
+  var path = __dirname + '/100b.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/100c.mp4', function (req, res) {
+  var path = __dirname + '/100c.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/104a.mp4', function (req, res) {
+  var path = __dirname + '/104a.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/104b.mp4', function (req, res) {
+  var path = __dirname + '/104b.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/104c.mp4', function (req, res) {
+  var path = __dirname + '/104c.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/115a.mp4', function (req, res) {
+  var path = __dirname + '/115a.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/115b.mp4', function (req, res) {
+  var path = __dirname + '/115b.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/115c.mp4', function (req, res) {
+  var path = __dirname + '/115c.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/132a.mp4', function (req, res) {
+  var path = __dirname + '/132a.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/132b.mp4', function (req, res) {
+  var path = __dirname + '/132b.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+router.get('/132c.mp4', function (req, res) {
+  var path = __dirname + '/132c.mp4';
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1]
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+});
+
+app.post('/', function(req, res) {
   //now req.body will be populated with the object you sent
   //console.log(req.body);
   accessSpreadsheet(req.body);
   res.sendStatus(200);
 });
 app.use(router);
-app.listen(41730);
-
-/*
-var server = http.createServer(function(request, response) {
-    var paths = url.parse(request.url).pathname;
-    if (request.method === "POST") {
-	console.log("POST request received");
-	var body = '';
-	request.on('data', function (data) {
-	    body += data;
-	});
-	request.on("end", function() {
-	    response.writeHead(200, { "Content-Type": "text/html" });
-	    accessSpreadsheet(body);
-	    response.end(body);
-	});
-    }
-    switch (paths) {
-        case '/':
-	    fs.readFile(__dirname + '/intro.html', function(error, data) {
-		if (error) {
-		    response.writeHead(404);
-		    console.log("Tried to go to intro");
-		    response.writeHead(error);
-		    response.end();
-		    }
-		else {
-		    console.log("intro loaded");
-		    response.writeHead(200, {
-			'Content-Type': 'text/html'
-		    });
-		    response.write(data);
-		    response.end();
-		}
-	});
-        break;
-/*	case '/':
-	response.writeHead(200, {
-	    'Content-Type': 'text/plain'
-	    });
-	response.write("this is test message.");
-	response.end();
-	break;
-
-    case '/favicon.ico':
-            response.writeHead(404);
-            response.end();
-            break;
-        case '/home.html':
-            fs.readFile(__dirname + paths, function(error, data) {
-                if (error) {
-                    response.writeHead(404);
-                    response.write(error);
-                    response.end();
-                } else {
-                    console.log("page loaded");
-                    response.writeHead(200, {
-                        'Content-Type': 'text/html'
-                    });
-                    response.write(data);
-                    response.end();
-                }
-            });
-            break;
-        case '/intro.html/':
-            fs.readFile(__dirname + '/intro.html', function(error, data) {
-                if (error) {
-                    response.writeHead(404);
-                    response.write(error);
-                    response.end();
-                } else {
-                    response.writeHead(200, {
-                        'Content-Type': 'text/html'
-                    });
-                    response.write(data);
-                    response.end();
-                }
-            });
-            break;
-        case '/style.css':
-            fs.readFile(__dirname + paths, function(error, data) {
-                if (error) {
-                    response.writeHead(404);
-                    response.write(error);
-                    response.end();
-                } else {
-                    response.writeHead(200, {
-                        'Content-Type': 'text/css'
-                    });
-                    response.write(data);
-                    response.end();
-                }
-            });
-            break;
-        case '/Part1.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                         "Accept-Ranges": "bytes",
-                                         "Content-Length": chunksize,
-                                         "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part2.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                         "Accept-Ranges": "bytes",
-                                         "Content-Length": chunksize,
-                                         "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part3.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                         "Accept-Ranges": "bytes",
-                                         "Content-Length": chunksize,
-                                         "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part4.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                         "Accept-Ranges": "bytes",
-                                         "Content-Length": chunksize,
-                                         "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part5.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                       "Accept-Ranges": "bytes",
-                                       "Content-Length": chunksize,
-                                       "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-              }
-            });
-            break;
-        case '/Part6.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                         "Accept-Ranges": "bytes",
-                                         "Content-Length": chunksize,
-                                         "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part7.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    var total = data.length;
-
-                    var range = request.headers.range;
-
-                    var positions = range.replace(/bytes=/, "").split("-");
-                    var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                    var chunksize = (end-start)+1;
-
-                    response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                          "Accept-Ranges": "bytes",
-                                          "Content-Length": chunksize,
-                                          "Content-Type":"video/mp4"});
-                    response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part8.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/Part9.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/100a.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/100b.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/100c.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/104a.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                    // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/104b.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/104c.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/115a.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/115b.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/115c.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/132a.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/132b.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-        case '/132c.mp4':
-            fs.readFile(__dirname + paths, function (error, data) {
-            if (error) {
-                throw error;
-            }
-            else {
-                var total = data.length;
-
-                var range = request.headers.range;
-
-                var positions = range.replace(/bytes=/, "").split("-");
-                var start = parseInt(positions[0], 10);
-                // if last byte position is not present then it is the last byte of the video file.
-                var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                var chunksize = (end-start)+1;
-
-                response.writeHead(206, { "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                                      "Accept-Ranges": "bytes",
-                                      "Content-Length": chunksize,
-                                      "Content-Type":"video/mp4"});
-                response.end(data.slice(start, end+1), "binary");
-                }
-            });
-            break;
-
-        default:
-            response.writeHead(404);
-            response.write("opps this doesn't exist - 404");
-            response.end();
-            break;
-    }
-});
-server.timeout = 500000;
-server.listen(42730);
-console.log("sercer running at http://127.0.0.1:42730/");*/
+app.listen(42730);
