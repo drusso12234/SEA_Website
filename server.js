@@ -13,6 +13,8 @@ const { promisify } = require('util');
 const creds = require('./client_secret.json');
 const doc = new GoogleSpreadsheet('1f4wDZe5M96BUvNRAkjuxnPQ284cy4En_pYX23bDrqqY');
 
+//This function takes a dictionary full of data as parameter. Then uses it
+//to upload data to the given spreadsheet
 async function accessSpreadsheet(jsonData) {
   await doc.useServiceAccountAuth({
     client_email: creds.client_email,
@@ -21,17 +23,12 @@ async function accessSpreadsheet(jsonData) {
 
   await doc.loadInfo();
 
-//    console.log(jsonData[id]);
-    console.log(jsonData['100a']);
-  //var data = JSON.stringify(Object.keys(jsonData)[0]);
   var data = String(jsonData).replace(/%2C/g, ",");
 
-    console.log(jsonData['id']);
-
   const sheet = doc.sheetsByIndex[0];
-  console.log(sheet.rowCount);
 
-  const testRow = await sheet.addRow({'ID': jsonData['id'], 
+  //This formats the data to be sent
+  const testRow = await sheet.addRow({'ID': jsonData['id'],
 				      '100aSens': jsonData['100a'].split(",")[0], '100aIntr': jsonData['100a'].split(",")[1], '100aWarm': jsonData['100a'].split(",")[2],
                                       '100bSens': jsonData['100b'].split(",")[0], '100bIntr': jsonData['100b'].split(",")[1], '100bWarm': jsonData['100b'].split(",")[2],
                                       '100cSens': jsonData['100c'].split(",")[0], '100cIntr': jsonData['100c'].split(",")[1], '100cWarm': jsonData['100c'].split(",")[2],
@@ -46,16 +43,20 @@ async function accessSpreadsheet(jsonData) {
                                       '132cSens': jsonData['132c'].split(",")[0], '132cIntr': jsonData['132c'].split(",")[1], '132cWarm': jsonData['132c'].split(",")[2]
                                       });
 }
-
+//Uses express tp set up the server
 var app=express();
+
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}))
+
 // Process application/json
 //app.use(cors());
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 
+//Below here is a whole lot router get functions to deliver all the stuff
+//the site needs
 router.get('/', function(request, response) {
     fs.readFile(__dirname + '/intro.ejs', function(error, data) {
     if (error) {
@@ -112,6 +113,8 @@ router.get('/style.css', function(request, response) {
 });
 
 router.get('/part1.mp4', function (req, res) {
+  //All this nonsense is what's needed to display a video.
+  //I don't know how it works
   var path = __dirname + '/part1.mp4';
   const stat = fs.statSync(path)
   const fileSize = stat.size

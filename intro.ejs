@@ -8,15 +8,15 @@
   <h1 style="text-align: center"> Introduction </h1>
 
   <script>
+  //Gets ID
     var id = prompt("Please enter your given ID number");
-    while (id < 6000 || id > 6999) {
-      id = prompt("Please enter a valid ID number");
-    }
     var pass = prompt("Please enter the given password");
-    while (pass != "babies123") {
+    //Checks for password. Yes it is hard coded
+    while (pass != "sealab123") {
       pass = prompt("Password incorrect, please contact supervisor for assitance");
     }
 
+    //Moves users to next page with their id number passed
     function nextPage() {
       window.location.href = 'home.ejs' + '#' + id;
     }
